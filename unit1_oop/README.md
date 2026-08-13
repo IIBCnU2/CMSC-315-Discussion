@@ -32,4 +32,9 @@ Your reflection should be approximately 150–200 words and address the followin
 1. What concepts or skills did you learn while completing this assignment?
 2. What challenges did you encounter, and how did you overcome them?
 3. Compare OOP to procedural programming.
-4. Discuss the benefits of maintainability and reusability and apply this managing overhead, practical application development, and future use.
+4. Discuss the benefits of maintainability and reusability and apply this to managing overhead, practical application development, and future use.
+
+REFLECTION:
+
+While working on this assignment, I learned the basics of object‑oriented programming, especially how classes, inheritance, namespaces, and copying work in Python. Creating a parent class and a child class helped me understand how OOP lets you build on existing code instead of starting from scratch. One challenge I faced was telling the difference between class variables and instance variables. Printing each object’s __dict__ made it easier to see what belonged to the class and what belonged to each object.
+Another challenge was understanding shallow and deep copying. After changing the nested list in the original object, I could clearly see how a shallow copy still shares some data, while a deep copy keeps everything separate. Compared to procedural programming, OOP feels more organized and easier to maintain because you can reuse and extend code instead of repeating it. This makes future projects easier to manage and helps reduce extra work as programs grow.
