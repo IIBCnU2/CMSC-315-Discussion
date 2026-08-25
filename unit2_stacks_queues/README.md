@@ -18,12 +18,12 @@ This assignment explores two fundamental linear data structures:
 
 Complete all TODO sections:
 
-1. Implement stack operations.
-2. Implement queue operations.
-3. Demonstrate LIFO behavior.
-4. Demonstrate FIFO behavior.
-5. Create and test edge cases.
-6. Create a real-world scenario.
+1. Implement stack operations. COMPLETED
+2. Implement queue operations. COMPLETED
+3. Demonstrate LIFO behavior. COMPLETED
+4. Demonstrate FIFO behavior. COMPLETED
+5. Create and test edge cases. COMPLETED
+6. Create a real-world scenario. COMPLETED
 
 ## Discussion Board Reflection
 
@@ -34,3 +34,6 @@ Your reflection should be approximately 150–200 words and address the followin
 1. What concepts or skills did you learn while completing this assignment?
 2. What challenges did you encounter, and how did you overcome them?
 3. Explain the differences between stacks and queues as this relates to real-world applications.
+
+REFLECTION:
+This assignment helped me better understand how stacks and queues work and how they are used in python. I learned that a stack follows LIFO, or last in, first out, with means the most recent added item is removed first. One challenge I encountered wa handling situations where I tried to remove or view item from n empty stack or queue. I overcame by using IndexError and adding checks with is_empty() before pserfomaring the operations. Testing the edge cases also helped me understand why error handling is important. In real world applications, stacks can be compared to a browser's back button, where the most recent page is accessed first. Queues are similar to a line at a store or a printer queue, where the first person or document added is handled first. Over all, this assignment helped me se how these concepts apply beyond programming.
