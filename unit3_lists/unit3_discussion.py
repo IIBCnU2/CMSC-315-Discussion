@@ -12,111 +12,128 @@ shift elements in memory and how different operations impact performance.
 
 def insert_at(lst, index, value):
     """
-    TODO (Student):
     Insert a value into the list at the specified index.
 
-    Requirements:
-    - Use a list operation to insert the value.
-    - Add comments explaining what happens to existing elements
-      after an insertion occurs.
-    - Use comments to explain how insertion performance may vary depending on
-      where the insertion occurs.
+    - Python's list.insert() shifts all elements to the right starting
+      from the index. For example, inserting at index 0 moves every
+      existing element one position over.
+    - Inserting at the beginning is the slowest because many elements
+      must shift. Inserting at the end is fastest because nothing shifts.
     """
-    pass
+    lst.insert(index, value)  # built‑in list insertion handles shifting
 
 
 def delete_at(lst, index):
     """
-    TODO (Student):
     Remove and return the value at the specified index.
 
-    Requirements:
-    - Validate that the index exists.
-    - Return the removed value.
-    - Return None if the index is invalid.
-    - Add comments explaining why index validation and safe deletion are important.
+    - We must validate the index to avoid crashes.
+    - Safe deletion prevents errors and makes the function predictable.
+    - If the index is valid, Python shifts all elements left to fill the gap.
     """
-    pass
+    if 0 <= index < len(lst):
+        return lst.pop(index)  # pop returns the removed value
+    else:
+        return None  # invalid index → safe failure
 
 
 def search_value(lst, value):
     """
-    TODO (Student):
     Search for a value within the list.
 
-    Requirements:
-    - Return the index if the value is found.
-    - Return -1 if the value is not found.
-    - Add comments explaining why this is a linear search and why it scans sequentially.
+    - This is a linear search because Python lists do not have fast
+      lookup by value. The search checks each element one-by-one
+      from left to right until it finds a match.
+    - If the value is not found, we return -1.
     """
-    pass
+    for i in range(len(lst)):
+        if lst[i] == value:
+            return i
+    return -1
 
 
 def main():
     print("=== UNIT 3: LIST OPERATIONS ===")
 
     # ===============================
-    # TODO (Student): INSERTION TESTS
+    # INSERTION TESTS
     # ===============================
-    #
-    # Requirements:
-    # 1. Create a list containing several values.
-    # 2. Display the original list.
-    # 3. Test insertion at:
-    #    - the beginning
-    #    - the middle
-    #    - the end
-    # 4. Display the list after each insertion.
-    # 5. Use comments to explain each step in the implementation.
-
     print("\n=== INSERTION TESTS ===")
-    print("TODO: Create a list and demonstrate insertions.")
+
+    # Create a list with several values
+    numbers = [10, 20, 30, 40]
+    print("Original list:", numbers)
+
+    # Insert at the beginning
+    # This shifts all elements to the right
+    insert_at(numbers, 0, 5)
+    print("After inserting 5 at beginning:", numbers)
+
+    # Insert in the middle
+    # Only elements after index 2 shift
+    insert_at(numbers, 2, 25)
+    print("After inserting 25 in middle:", numbers)
+
+    # Insert at the end
+    # No shifting required
+    insert_at(numbers, len(numbers), 50)
+    print("After inserting 50 at end:", numbers)
 
     # ===============================
-    # TODO (Student): DELETION TESTS
+    # DELETION TESTS
     # ===============================
-    #
-    # Requirements:
-    # 1. Delete an item from:
-    #    - the beginning
-    #    - the middle
-    #    - the end
-    # 2. Display the removed value.
-    # 3. Display the updated list after each deletion.
-    # 4. Use comments to clearly explain what is happening in the output.
-
     print("\n=== DELETION TESTS ===")
-    print("TODO: Demonstrate deletions from multiple positions.")
+
+    # Delete from beginning
+    removed = delete_at(numbers, 0)
+    print("Removed from beginning:", removed)
+    print("List now:", numbers)
+
+    # Delete from middle
+    removed = delete_at(numbers, 2)
+    print("Removed from middle:", removed)
+    print("List now:", numbers)
+
+    # Delete from end
+    removed = delete_at(numbers, len(numbers) - 1)
+    print("Removed from end:", removed)
+    print("List now:", numbers)
 
     # ===============================
-    # TODO (Student): SEARCH TESTS
+    # SEARCH TESTS
     # ===============================
-    #
-    # Requirements:
-    # 1. Search for a value that exists.
-    # 2. Search for a value that does not exist.
-    # 3. Display the search results with clear explanations.
-    # 4. Use comments to explain each step.
-
     print("\n=== SEARCH TESTS ===")
-    print("TODO: Demonstrate searching for values.")
+
+    # Search for a value that exists
+    index_found = search_value(numbers, 25)
+    print("Searching for 25 → index:", index_found)
+
+    # Search for a value that does not exist
+    index_missing = search_value(numbers, 999)
+    print("Searching for 999 → index:", index_missing)
 
     # ===============================
-    # TODO (Student): EDGE CASES
+    # EDGE CASES
     # ===============================
-    #
-    # Demonstrate at least two edge cases.
-    #
-    # Example ideas:
-    # - Delete using an invalid index
-    # - Search for a missing value
-    # - Insert into an empty list
-    # - Delete from an empty list
-    # - Use comments to explain each edge case.
-
     print("\n=== EDGE CASES ===")
-    print("TODO: Demonstrate at least two edge cases.")
 
+    # Edge Case 1: Delete using invalid index
+    print("Attempting to delete at invalid index 100:")
+    print("Result:", delete_at(numbers, 100))  # returns None
+
+    # Edge Case 2: Insert into an empty list
+    empty_list = []
+    print("\nInserting into an empty list:")
+    insert_at(empty_list, 0, "first")
+    print("Empty list after insertion:", empty_list)
+
+    # Edge Case 3: Delete from an empty list
+    print("\nDeleting from an empty list:")
+    print("Result:", delete_at([], 0))  # None because list is empty
+
+    # Edge Case 4: Search for missing value
+    print("\nSearching for missing value in list:")
+    print("Result:", search_value(numbers, -1))
 
 
 if __name__ == "__main__":
