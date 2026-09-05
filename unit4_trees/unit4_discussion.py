@@ -17,14 +17,16 @@ class Node:
         # TODO (Student):
         # Store the node's value and initialize references
         # to the left and right child nodes.
-        pass
+        self.value = value
+        self.left = None
+        self.right = None
 
 
 class BST:
     def __init__(self):
         # TODO (Student):
         # Initialize an empty Binary Search Tree.
-        pass
+        self.root = None
 
     def insert(self, value):
         """
@@ -37,7 +39,12 @@ class BST:
           whether a value is smaller or larger than the
           current node.
         """
-        pass
+        # If the tree is empty, the first value becomes the root
+        if self.root is None:
+            self.root = Node(value)
+        else:
+            # Use recursion to find the correct spot
+            self._insert_recursive(self.root, value)
 
     def _insert_recursive(self, node, value):
         """
@@ -50,7 +57,22 @@ class BST:
         - Insert larger values into the right subtree.
         - Return the updated node reference.
         """
-        pass
+        # Smaller values always go left
+        if value < node.value:
+            if node.left is None:
+                node.left = Node(value)
+            else:
+                self._insert_recursive(node.left, value)
+
+        # Larger values always go right
+        elif value > node.value:
+            if node.right is None:
+                node.right = Node(value)
+            else:
+                self._insert_recursive(node.right, value)
+
+        # If equal, ignore (simple duplicate handling)
+        return node
 
     def search(self, value):
         """
@@ -63,14 +85,22 @@ class BST:
         - Add comments explaining why BST search is often
           more efficient than linear search.
         """
-        pass
+        # BST search is faster because each step cuts the search space down
+        return self._search_recursive(self.root, value)
 
     def _search_recursive(self, node, value):
         """
         TODO (Student):
         Implement recursive BST search.
         """
-        pass
+        if node is None:
+            return False
+        if value == node.value:
+            return True
+        elif value < node.value:
+            return self._search_recursive(node.left, value)
+        else:
+            return self._search_recursive(node.right, value)
 
     def inorder(self):
         """
@@ -78,7 +108,9 @@ class BST:
         Return a list containing the values from an
         in-order traversal.
         """
-        pass
+        values = []
+        self._inorder_recursive(self.root, values)
+        return values
 
     def _inorder_recursive(self, node, values):
         """
@@ -92,7 +124,17 @@ class BST:
         - Add comments explaining why this traversal
           produces sorted output in a BST.
         """
-        pass
+        if node is None:
+            return
+
+        # Visit left first (smaller values)
+        self._inorder_recursive(node.left, values)
+
+        # Visit the node itself
+        values.append(node.value)
+
+        # Visit right (larger values)
+        self._inorder_recursive(node.right, values)
 
 
 def main():
@@ -101,60 +143,53 @@ def main():
     # ===============================
     # TODO (Student): BUILD A TREE
     # ===============================
-    #
-    # Requirements:
-    # 1. Create a BST object.
-    # 2. Insert at least 7 values.
-    # 3. Include values that go into both left
-    #    and right subtrees.
-    # 4. Display the values inserted.
-    # 5. Use comments to explain why a BST is efficient at reducing search space for each step.
-
     print("\n=== TREE CONSTRUCTION ===")
     print("TODO: Create a BST and insert multiple values.")
+
+    bst = BST()
+
+    # Insert values (both left and right branches)
+    values_to_insert = [50, 30, 70, 20, 40, 60, 80]
+    print("Inserting values:", values_to_insert)
+
+    for v in values_to_insert:
+        bst.insert(v)
+
+    # BST reduces search space each step
+    print("BST built. Each comparison cuts the search space down.")
 
     # ===============================
     # TODO (Student): IN-ORDER TRAVERSAL
     # ===============================
-    #
-    # Requirements:
-    # 1. Perform an in-order traversal.
-    # 2. Display the traversal results.
-    # 3. Use comments to explain why the traversal produces
-    #    sorted output in a BST.
-
     print("\n=== IN-ORDER TRAVERSAL ===")
     print("TODO: Display and explain traversal results.")
+
+    inorder_list = bst.inorder()
+    print("In-order traversal:", inorder_list)
+    print("This is sorted because smaller values are stored on the left and larger on the right.")
 
     # ===============================
     # TODO (Student): SEARCH TESTS
     # ===============================
-    #
-    # Requirements:
-    # 1. Search for at least two values that exist.
-    # 2. Search for at least two values that do not exist.
-    # 3. Use comments to clearly explain the results.
-
     print("\n=== SEARCH TESTS ===")
     print("TODO: Demonstrate BST searching.")
+
+    print("Search 40:", bst.search(40))  # exists
+    print("Search 70:", bst.search(70))  # exists
+    print("Search 10:", bst.search(10))  # not found
+    print("Search 99:", bst.search(99))  # not found
+
+    print("BST search follows the tree path instead of checking every value.")
 
     # ===============================
     # TODO (Student): EDGE CASES
     # ===============================
-    #
-    # Demonstrate at least one edge case.
-    #
-    # Example ideas:
-    # - Traverse an empty tree
-    # - Search an empty tree
-    # - Insert duplicate values
-    # - Create a tree with only one node
-    #
-    # Use comments to explain what happens and why.
-
     print("\n=== EDGE CASES ===")
     print("TODO: Demonstrate and explain an edge case.")
 
+    empty_tree = BST()
+    print("Searching empty tree for 5:", empty_tree.search(5))
+    print("Empty tree returns False because there are no nodes to check.")
 
 
 if __name__ == "__main__":
