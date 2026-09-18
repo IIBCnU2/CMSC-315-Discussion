@@ -31,9 +31,23 @@ def main():
     #    behaves like a hash table.
     # 4. Display the contents of the dictionary.
 
-
     print("\n=== INSERT OPERATIONS ===")
-    print("TODO: Create a dictionary and add multiple key-value pairs.")
+
+    # A Python dictionary acts like a hash table because:
+    # - Each key is run through a hash function.
+    # - The hash determines where the value is stored in memory.
+    # - This allows fast insertion and lookup.
+
+    hash_table = {}  # empty dictionary (empty hash table)
+
+    # Insert key-value pairs
+    hash_table["name"] = "DJ"
+    hash_table["age"] = 22
+    hash_table["city"] = "Redzikowo"
+    hash_table["favorite_game"] = "Tarkov"
+    hash_table["student"] = True
+
+    print("Hash table after inserts:", hash_table)
 
     # ===============================
     # TODO (Student): LOOKUP OPERATIONS
@@ -45,7 +59,11 @@ def main():
     # 3. Add meaningful comments to explain how the lookup works.
 
     print("\n=== LOOKUP OPERATIONS ===")
-    print("TODO: Demonstrate successful key lookups.")
+
+    # Lookup works by hashing the key and jumping directly
+    # to the memory location where the value is stored.
+    print("Lookup 'name':", hash_table["name"])
+    print("Lookup 'city':", hash_table["city"])
 
     # ===============================
     # TODO (Student): UPDATE OPERATIONS
@@ -58,7 +76,13 @@ def main():
     #    a new value.
 
     print("\n=== UPDATE OPERATIONS ===")
-    print("TODO: Demonstrate updating an existing key.")
+
+    print("Before update:", hash_table)
+
+    # Updating a key simply replaces the old value stored at that hashed location.
+    hash_table["favorite_game"] = "Call of Duty"
+
+    print("After update:", hash_table)
 
     # ===============================
     # TODO (Student): DELETE OPERATIONS
@@ -70,7 +94,13 @@ def main():
     # 3. Use comments to explain what happens when a key is removed.
 
     print("\n=== DELETE OPERATIONS ===")
-    print("TODO: Demonstrate deleting a key-value pair.")
+
+    print("Before deletion:", hash_table)
+
+    # Deleting a key removes the entry from the hash table entirely.
+    del hash_table["student"]
+
+    print("After deletion:", hash_table)
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -87,8 +117,23 @@ def main():
     # Explain what happens in each case.
 
     print("\n=== EDGE CASES ===")
-    print("TODO: Demonstrate and explain edge cases.")
 
+    # Edge Case 1: Lookup a missing key
+    print("\nEdge Case 1: Lookup missing key 'salary'")
+    # Using .get() avoids a crash and returns None instead of an error
+    print("Result:", hash_table.get("salary"))
+
+    # Edge Case 2: Safely deleting a missing key
+    print("\nEdge Case 2: Safe delete of missing key 'address'")
+    if "address" in hash_table:
+        del hash_table["address"]
+    else:
+        print("Key 'address' does not exist, so it cannot be deleted.")
+
+    # Edge Case 3: Updating a missing key (creates a new entry)
+    print("\nEdge Case 3: Updating a missing key 'hobby'")
+    hash_table["hobby"] = "Car maintenance"
+    print("Updated hash table:", hash_table)
 
 
 if __name__ == "__main__":
