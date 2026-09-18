@@ -33,21 +33,21 @@ def main():
 
     print("\n=== INSERT OPERATIONS ===")
 
-    # A Python dictionary acts like a hash table because:
-    # - Each key is run through a hash function.
-    # - The hash determines where the value is stored in memory.
-    # - This allows fast insertion and lookup.
+    # I chose a real-world example: an inventory lookup system.
+    # Each product name acts as a key, and its quantity acts as the value.
+    # Python dictionaries behave like hash tables because each key is hashed
+    # and mapped to a memory location, allowing fast access.
 
-    hash_table = {}  # empty dictionary (empty hash table)
+    inventory = {}  # empty hash table
 
-    # Insert key-value pairs
-    hash_table["name"] = "DJ"
-    hash_table["age"] = 22
-    hash_table["city"] = "Redzikowo"
-    hash_table["favorite_game"] = "Tarkov"
-    hash_table["student"] = True
+    # Insert key-value pairs (product → quantity)
+    inventory["water_bottle"] = 30
+    inventory["headphones"] = 12
+    inventory["keyboard"] = 8
+    inventory["mouse"] = 15
+    inventory["monitor"] = 5
 
-    print("Hash table after inserts:", hash_table)
+    print("Inventory after inserts:", inventory)
 
     # ===============================
     # TODO (Student): LOOKUP OPERATIONS
@@ -60,10 +60,9 @@ def main():
 
     print("\n=== LOOKUP OPERATIONS ===")
 
-    # Lookup works by hashing the key and jumping directly
-    # to the memory location where the value is stored.
-    print("Lookup 'name':", hash_table["name"])
-    print("Lookup 'city':", hash_table["city"])
+    # Lookup works by hashing the key and jumping directly to its stored value.
+    print("Lookup 'keyboard':", inventory["keyboard"])
+    print("Lookup 'mouse':", inventory["mouse"])
 
     # ===============================
     # TODO (Student): UPDATE OPERATIONS
@@ -77,12 +76,12 @@ def main():
 
     print("\n=== UPDATE OPERATIONS ===")
 
-    print("Before update:", hash_table)
+    print("Before update:", inventory)
 
-    # Updating a key simply replaces the old value stored at that hashed location.
-    hash_table["favorite_game"] = "Call of Duty"
+    # Updating a key replaces the old value at the same hashed location.
+    inventory["monitor"] = 10  # restocked monitors
 
-    print("After update:", hash_table)
+    print("After update:", inventory)
 
     # ===============================
     # TODO (Student): DELETE OPERATIONS
@@ -95,12 +94,12 @@ def main():
 
     print("\n=== DELETE OPERATIONS ===")
 
-    print("Before deletion:", hash_table)
+    print("Before deletion:", inventory)
 
-    # Deleting a key removes the entry from the hash table entirely.
-    del hash_table["student"]
+    # Removing a key deletes the entry entirely from the hash table.
+    del inventory["headphones"]
 
-    print("After deletion:", hash_table)
+    print("After deletion:", inventory)
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -119,21 +118,21 @@ def main():
     print("\n=== EDGE CASES ===")
 
     # Edge Case 1: Lookup a missing key
-    print("\nEdge Case 1: Lookup missing key 'salary'")
+    print("\nEdge Case 1: Lookup missing key 'tablet'")
     # Using .get() avoids a crash and returns None instead of an error
-    print("Result:", hash_table.get("salary"))
+    print("Result:", inventory.get("tablet"))
 
-    # Edge Case 2: Safely deleting a missing key
-    print("\nEdge Case 2: Safe delete of missing key 'address'")
-    if "address" in hash_table:
-        del hash_table["address"]
+    # Edge Case 2: Safe delete of missing key
+    print("\nEdge Case 2: Safe delete of missing key 'charger'")
+    if "charger" in inventory:
+        del inventory["charger"]
     else:
-        print("Key 'address' does not exist, so it cannot be deleted.")
+        print("Key 'charger' does not exist, so it cannot be deleted.")
 
     # Edge Case 3: Updating a missing key (creates a new entry)
-    print("\nEdge Case 3: Updating a missing key 'hobby'")
-    hash_table["hobby"] = "Car maintenance"
-    print("Updated hash table:", hash_table)
+    print("\nEdge Case 3: Updating a missing key 'webcam'")
+    inventory["webcam"] = 20
+    print("Updated inventory:", inventory)
 
 
 if __name__ == "__main__":
